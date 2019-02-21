@@ -6,7 +6,7 @@ const Post = props => {
     <div>
       <Card>
         <CardBody>
-          <CardText>{props.post.posts_content}</CardText>
+          <CardText>{props.post.content}</CardText>
         </CardBody>
       </Card>
     </div>

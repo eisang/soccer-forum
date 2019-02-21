@@ -1,23 +1,23 @@
 import React, { Component } from "react";
 import "./App.css";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import HeaderNav from "./components/HeaderNav";
 import Home from "./components/Home";
 import UserList from "./components/UserList";
-import PostList from "./components/PostList";
+// import PostList from "./components/PostList";
 import AddPost from "./components/AddPost";
 
 class App extends Component {
   state = {
-    users: [],
-    posts: []
+    users: []
+    // posts: []
   };
 
   addNewPost = newPost => {
-    const { user_name, content } = newPost;
-    fetch("http://localhost:3001/posts/", {
+    const { nickname, content } = newPost;
+    fetch("http://localhost:3001/users", {
       method: "post",
-      body: JSON.stringify({ user_name, content }),
+      body: JSON.stringify({ nickname, content }),
       headers: {
         "Content-Type": "application/json"
       }
@@ -26,10 +26,10 @@ class App extends Component {
       .then(json => {
         this.setState(prevState => {
           return {
-            posts: [
-              ...prevState.posts,
+            users: [
+              ...prevState.users,
               {
-                user_name,
+                nickname,
                 content
               }
             ]
@@ -52,20 +52,22 @@ class App extends Component {
     } catch (e) {
       alert(e);
     }
-    try {
-      const res = await fetch("http://localhost:3001/posts");
-      const json = await res.json();
-      this.setState({
-        posts: json.map(post => {
-          return {
-            ...post
-          };
-        })
-      });
-    } catch (e) {
-      alert(e);
-    }
   };
+  // componentDidMount = async () => {
+  //   try {
+  //     const res = await fetch("http://localhost:3001/posts");
+  //     const json = await res.json();
+  //     this.setState({
+  //       posts: json.map(post => {
+  //         return {
+  //           ...post
+  //         };
+  //       })
+  //     });
+  //   } catch (e) {
+  //     alert(e);
+  //   }
+  // };
 
   render() {
     return (
@@ -77,6 +79,16 @@ class App extends Component {
           <Route
             path="/chat"
             render={props => <UserList users={this.state.users} />}
+          />
+
+          {/* <Route
+            // path="/chat"
+            render={props => <PostList posts={this.state.posts} />}
+          /> */}
+
+          <Route
+            path="/chat"
+            render={props => <AddPost addNewPost={this.addNewPost} />}
           />
 
           {/* <Route exact path="/chat" component={UserList} /> */}
