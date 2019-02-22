@@ -4,14 +4,16 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import HeaderNav from "./components/HeaderNav";
 import Home from "./components/Home";
 import UserList from "./components/UserList";
-// import PostList from "./components/PostList";
 import AddPost from "./components/AddPost";
+import axios from "axios";
+// import Container from "Container";
 
 class App extends Component {
   state = {
     users: []
-    // posts: []
   };
+
+  newlyAddedPost = () => this.state.users.filter(user => user.addedPost);
 
   addNewPost = newPost => {
     const { nickname, content } = newPost;
@@ -38,6 +40,17 @@ class App extends Component {
       });
   };
 
+  removeUserPost = id => {
+    // console.log(this.removeUserPost)
+    axios.delete(`http://localhost:3001/users/${id}`).then(res => {
+      const individualUsers = this.state.users.filter(user => user.id !== id);
+      console.log("removeUserPost", this.removeUserPost);
+      this.setState({
+        users: [...individualUsers, ...res.data]
+      });
+    });
+  };
+
   componentDidMount = async () => {
     try {
       const res = await fetch("http://localhost:3001/users");
@@ -53,59 +66,32 @@ class App extends Component {
       alert(e);
     }
   };
-  // componentDidMount = async () => {
-  //   try {
-  //     const res = await fetch("http://localhost:3001/posts");
-  //     const json = await res.json();
-  //     this.setState({
-  //       posts: json.map(post => {
-  //         return {
-  //           ...post
-  //         };
-  //       })
-  //     });
-  //   } catch (e) {
-  //     alert(e);
-  //   }
-  // };
 
   render() {
+    // console.log("users", users);
     return (
+      // <Container>
       <Router>
         <div>
           <HeaderNav name="here" />
-
           <Route exact path="/" component={Home} />
           <Route
             path="/chat"
-            render={props => <UserList users={this.state.users} />}
+            render={props => (
+              <UserList
+                users={this.state.users}
+                removeUserPost={this.removeUserPost}
+                // newlyAddedPost={this.addedPost()}
+              />
+            )}
           />
-
-          {/* <Route
-            // path="/chat"
-            render={props => <PostList posts={this.state.posts} />}
-          /> */}
-
           <Route
             path="/chat"
             render={props => <AddPost addNewPost={this.addNewPost} />}
           />
-
-          {/* <Route exact path="/chat" component={UserList} /> */}
-
-          {/* <AddPost addNewPost={this.addNewPost} /> */}
-
-          {/* <Route exact strict path="/" component={Home} /> */}
-
-          {/* <Route
-            exact
-            path="/sing"
-            render={() => {
-              return <h4>Lets go Blues</h4>;
-            }}
-          /> */}
         </div>
       </Router>
+      // </Container>
     );
   }
 }
