@@ -1,5 +1,4 @@
 import React from "react";
-import { Jumbotron, Container } from "reactstrap";
 
 const User = props => {
   return (
@@ -16,14 +15,6 @@ const User = props => {
           />
         </li>
       </ul>
-      {/* <button onClick={() => props.removeUserPost(props.user.id)}>
-        remove
-      </button> */}
-      {/* <i
-        style={{ marginBottom: "20px" }}
-        className="fa fa-trash-o"
-        onClick={() => props.removeUserPost(props.user.id)}
-      /> */}
 
       <hr />
     </div>

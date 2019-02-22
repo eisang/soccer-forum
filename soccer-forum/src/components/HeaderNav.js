@@ -27,7 +27,7 @@ class HeaderNav extends Component {
     return (
       <div>
         <Navbar color="primary" light expand="md">
-          <NavbarBrand style={{ color: "white" }}>Soccer Forum</NavbarBrand>
+          <NavbarBrand style={{ color: "white" }}>Sports Forum</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { InputGroup, Input, Button, Jumbotron, Container } from "reactstrap";
+import { InputGroup, Input, Button } from "reactstrap";
+import { FaPaperPlane } from "react-icons/fa";
 
 class AddPost extends Component {
   state = {
@@ -26,7 +27,6 @@ class AddPost extends Component {
       nickname: this.state.nickname
     };
     this.props.addNewPost(newPost);
-    // this.handleSubmit.value = "";
     this.setState({
       content: "",
       nickname: ""
@@ -36,13 +36,6 @@ class AddPost extends Component {
   render() {
     return (
       <div className="container">
-        {/* <div>
-          <Jumbotron fluid color="primary">
-            <Container fluid>
-              <h4 className="display-5">Welcome to the Chat room!</h4>
-            </Container>
-          </Jumbotron>
-        </div> */}
         <form
           onSubmit={this.handleSubmit}
           style={{
@@ -76,12 +69,8 @@ class AddPost extends Component {
           </div>
           <div style={{ marginTop: "15px", marginLeft: "20px" }}>
             <Button size="sm" color="info" style={{ marginLeft: "30px" }}>
-              Submit
+              <FaPaperPlane />
             </Button>
-
-            {/* <i className="fas fa-paper-plane" /> */}
-
-            {/* <i className="fas fa-paper-plane" /> */}
           </div>
         </form>
       </div>

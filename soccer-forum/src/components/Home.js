@@ -14,6 +14,7 @@ import {
   Label,
   Button
 } from "reactstrap";
+// import "bootswatch/dist/Minty/bootstrap.min.css";
 
 const items = [
   {
@@ -51,6 +52,10 @@ class Home extends Component {
   onExited() {
     this.animating = false;
   }
+
+  onSubmit = () => {
+    this.props.history.push("/chat");
+  };
 
   next() {
     if (this.animating) return;
@@ -120,7 +125,7 @@ class Home extends Component {
                   type="email"
                   name="email"
                   id="exampleEmail"
-                  placeholder="with a placeholder"
+                  placeholder="enter your email"
                 />
               </FormGroup>
               <FormGroup>
@@ -129,10 +134,10 @@ class Home extends Component {
                   type="password"
                   name="password"
                   id="examplePassword"
-                  placeholder="password placeholder"
+                  placeholder="enter your password"
                 />
               </FormGroup>
-              <Button>Submit</Button>
+              <Button onClick={this.onSubmit}>Submit</Button>
             </Form>
             <Col xs={6}>
               <Carousel
@@ -189,45 +194,3 @@ class Home extends Component {
 }
 
 export default Home;
-
-//   return (
-//     <div>
-//       <Jumbotron fluid>
-//         <Container fluid>
-//           <h4 className="display-5">Welcome to the Chat room!</h4>
-//         </Container>
-//       </Jumbotron>
-//       <Container>
-//         <Row>
-//           <Col xs={4}>
-//             <img
-//               // style={{ width: "100%", height: "75%" }}
-//               src="https://images.unsplash.com/photo-1505988880760-fcbf026bb1e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
-//               altText="Slide 5"
-//             />
-//           </Col>
-//           <Col xs={4}>
-//             <img
-//               src="https://images.unsplash.com/photo-1505988880760-fcbf026bb1e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
-//               altText="Slide 5"
-//             />
-//           </Col>
-//           <Col xs={4}>
-//             <img
-//               src="https://images.unsplash.com/photo-1505988880760-fcbf026bb1e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
-//               altText="Slide 5"
-//             />
-//           </Col>
-//           {/* <Col>
-//             <img
-//               src="https://images.unsplash.com/photo-1505988880760-fcbf026bb1e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
-//               altText="Slide 5"
-//             />
-//           </Col> */}
-//         </Row>
-//       </Container>
-//     </div>
-//   );
-// };
-
-// export default Home;

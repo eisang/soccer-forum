@@ -12,8 +12,6 @@ class App extends Component {
     users: []
   };
 
-  // newlyAddedPost = () => this.state.users.filter(user => user.addedPost);
-
   addNewPost = newPost => {
     const { nickname, content } = newPost;
     fetch("http://localhost:3001/users", {
