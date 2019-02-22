@@ -6,14 +6,13 @@ import Home from "./components/Home";
 import UserList from "./components/UserList";
 import AddPost from "./components/AddPost";
 import axios from "axios";
-// import Container from "Container";
 
 class App extends Component {
   state = {
     users: []
   };
 
-  newlyAddedPost = () => this.state.users.filter(user => user.addedPost);
+  // newlyAddedPost = () => this.state.users.filter(user => user.addedPost);
 
   addNewPost = newPost => {
     const { nickname, content } = newPost;
@@ -26,11 +25,13 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(json => {
+        console.log(json);
         this.setState(prevState => {
           return {
             users: [
               ...prevState.users,
               {
+                id: json[0].id,
                 nickname,
                 content
               }
@@ -41,12 +42,10 @@ class App extends Component {
   };
 
   removeUserPost = id => {
-    // console.log(this.removeUserPost)
     axios.delete(`http://localhost:3001/users/${id}`).then(res => {
       const individualUsers = this.state.users.filter(user => user.id !== id);
-      console.log("removeUserPost", this.removeUserPost);
       this.setState({
-        users: [...individualUsers, ...res.data]
+        users: [...individualUsers]
       });
     });
   };
@@ -68,9 +67,7 @@ class App extends Component {
   };
 
   render() {
-    // console.log("users", users);
     return (
-      // <Container>
       <Router>
         <div>
           <HeaderNav name="here" />
@@ -81,7 +78,6 @@ class App extends Component {
               <UserList
                 users={this.state.users}
                 removeUserPost={this.removeUserPost}
-                // newlyAddedPost={this.addedPost()}
               />
             )}
           />
@@ -91,7 +87,6 @@ class App extends Component {
           />
         </div>
       </Router>
-      // </Container>
     );
   }
 }

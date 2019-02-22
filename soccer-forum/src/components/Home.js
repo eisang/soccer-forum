@@ -1,21 +1,35 @@
 import React, { Component } from "react";
 import {
   Carousel,
+  Jumbotron,
+  Container,
   CarouselItem,
   CarouselControl,
-  CarouselIndicators
+  CarouselIndicators,
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  Input,
+  Label,
+  Button
 } from "reactstrap";
 
 const items = [
   {
     src:
-      "https://img.fifa.com/image/upload/t_s3/v1548171233/hahzskmg7ohy1wdqzw45.jpg",
+      "https://images.unsplash.com/photo-1542050939822-419d5716b8b3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
     altText: "Slide 2"
   },
   {
     src:
-      "https://www.rydercup.com/sites/default/files/Ryder-Cup-Fans-Hazeltine.jpg",
+      "https://images.unsplash.com/photo-1490323522928-9bfab6309902?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80",
     altText: "Slide 3"
+  },
+  {
+    src:
+      "https://images.unsplash.com/photo-1505988880760-fcbf026bb1e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80",
+    altText: "Slide 5"
   }
 ];
 
@@ -67,40 +81,153 @@ class Home extends Component {
     const slides = items.map(item => {
       return (
         <CarouselItem
+          // style={{ width: "50%", height: "10%" }}
           onExiting={this.onExiting}
           onExited={this.onExited}
           key={item.src}
         >
-          <img src={item.src} alt={item.altText} />
+          <img
+            src={item.src}
+            alt={item.altText}
+            style={{ width: "60%", height: "10%" }}
+          />
         </CarouselItem>
       );
     });
 
     return (
-      <Carousel
-        activeIndex={activeIndex}
-        next={this.next}
-        previous={this.previous}
-      >
-        <CarouselIndicators
-          items={items}
-          activeIndex={activeIndex}
-          onClickHandler={this.goToIndex}
-        />
-        {slides}
-        <CarouselControl
-          direction="prev"
-          directionText="Previous"
-          onClickHandler={this.previous}
-        />
-        <CarouselControl
-          direction="next"
-          directionText="Next"
-          onClickHandler={this.next}
-        />
-      </Carousel>
+      <div>
+        <div>
+          <Jumbotron fluid color="primary">
+            <Container fluid>
+              <h4 className="display-5">Welcome to the Chat room!</h4>
+            </Container>
+          </Jumbotron>
+        </div>
+
+        <div>
+          <Row>
+            <Form
+              style={{
+                marginLeft: "150px",
+                marginRight: "340px",
+                marginTop: "50px"
+              }}
+            >
+              <FormGroup>
+                <Label for="exampleEmail">Email</Label>
+                <Input
+                  type="email"
+                  name="email"
+                  id="exampleEmail"
+                  placeholder="with a placeholder"
+                />
+              </FormGroup>
+              <FormGroup>
+                <Label for="examplePassword">Password</Label>
+                <Input
+                  type="password"
+                  name="password"
+                  id="examplePassword"
+                  placeholder="password placeholder"
+                />
+              </FormGroup>
+              <Button>Submit</Button>
+            </Form>
+            <Col xs={6}>
+              <Carousel
+                style={{ marginRight: "99px" }}
+                activeIndex={activeIndex}
+                next={this.next}
+                previous={this.previous}
+              >
+                <CarouselIndicators
+                  items={items}
+                  activeIndex={activeIndex}
+                  onClickHandler={this.goToIndex}
+                />
+                {slides}
+                <CarouselControl
+                  direction="prev"
+                  directionText="Previous"
+                  onClickHandler={this.previous}
+                />
+                <CarouselControl
+                  direction="next"
+                  directionText="Next"
+                  onClickHandler={this.next}
+                />
+              </Carousel>
+
+              {/* <Form style={{ marginalign: "inline" }}>
+                <FormGroup>
+                  <Label for="exampleEmail">Email</Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    id="exampleEmail"
+                    placeholder="with a placeholder"
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Label for="examplePassword">Password</Label>
+                  <Input
+                    type="password"
+                    name="password"
+                    id="examplePassword"
+                    placeholder="password placeholder"
+                  />
+                </FormGroup>
+                <Button>Submit</Button>
+              </Form> */}
+            </Col>
+          </Row>
+        </div>
+      </div>
     );
   }
 }
 
 export default Home;
+
+//   return (
+//     <div>
+//       <Jumbotron fluid>
+//         <Container fluid>
+//           <h4 className="display-5">Welcome to the Chat room!</h4>
+//         </Container>
+//       </Jumbotron>
+//       <Container>
+//         <Row>
+//           <Col xs={4}>
+//             <img
+//               // style={{ width: "100%", height: "75%" }}
+//               src="https://images.unsplash.com/photo-1505988880760-fcbf026bb1e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+//               altText="Slide 5"
+//             />
+//           </Col>
+//           <Col xs={4}>
+//             <img
+//               src="https://images.unsplash.com/photo-1505988880760-fcbf026bb1e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+//               altText="Slide 5"
+//             />
+//           </Col>
+//           <Col xs={4}>
+//             <img
+//               src="https://images.unsplash.com/photo-1505988880760-fcbf026bb1e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+//               altText="Slide 5"
+//             />
+//           </Col>
+//           {/* <Col>
+//             <img
+//               src="https://images.unsplash.com/photo-1505988880760-fcbf026bb1e9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80"
+//               altText="Slide 5"
+//             />
+//           </Col> */}
+//         </Row>
+//       </Container>
+//     </div>
+//   );
+// };
+
+// export default Home;
